@@ -1,0 +1,94 @@
+plugins {
+    id 'com.android.application'
+    id 'com.mob.sdk'
+    id 'kotlin-android'
+}
+
+MobSDK {
+//    袤博账号，注册完成后创建应用即可获得appKey和AppSecret https://www.mob.com/
+    appKey ""
+    appSecret ""
+    SMSSDK {}
+}
+
+android {
+    signingConfigs {
+        debug {
+////            请自行创建秘钥文件，并更改为自己的
+//            storeFile file('F:\\Android\\mySecretKey.jks')
+//            storePassword '123456'
+//            keyAlias 'keymain'
+//            keyPassword '123456'
+        }
+    }
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.example.project_android"
+        minSdkVersion 26
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets{
+        main{
+            res.srcDirs = ['src/main/res']
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'com.google.android.material:material:1.2.0-alpha06'
+    implementation 'androidx.navigation:navigation-fragment:2.2.2'
+    implementation 'androidx.navigation:navigation-ui:2.2.2'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    implementation 'org.jsoup:jsoup:1.13.1'
+    implementation 'com.alibaba:fastjson:1.2.75'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation files('libs\\BaiduLBS_Android.jar')
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
+    implementation 'com.arialyy.aria:core:3.8.15'
+    implementation 'com.soundcloud.android:android-crop:1.0.1@aar'
+    annotationProcessor 'com.arialyy.aria:compiler:3.8.15'
+    implementation 'com.loopj.android:android-async-http:1.4.11'
+    implementation 'com.github.codbking:PickTime:v1.0.1'
+    implementation 'com.github.arcadefire:nice-spinner:1.4.4'
+    implementation 'com.github.ihsg:PatternLocker:2.5.7'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+
+
+//    工具类
+    implementation 'com.blankj:utilcodex:1.30.6'
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
