@@ -32,7 +32,7 @@ import cn.smssdk.ui.companent.CircleImageView;
 
 @SuppressLint("NonConstantResourceId")
 public class MainActivity extends AppCompatActivity {
-    @BindView(R.id.action_bar_title)
+    @BindView(R.id.action_bar_title2)
     TextView titleText;
     @BindView(R.id.drawer_layout_teacher)
     DrawerLayout drawerLayout;
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setCheckedItem(R.id.main_menu_course);
         navigationView.setNavigationItemSelectedListener(item -> {
             drawerLayout.closeDrawers();
-//            执行具体跳转fragment的操作
+//          //执行具体跳转fragment的操作
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             hideAllFragment();
             switch (item.getItemId()){

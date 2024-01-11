@@ -4,24 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#64E7DF"
+    android:background="#64DCFC"
     tools:context=".activity.login.LoginActivity">
 
 
+    <!--一个参考线-->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.05" />
-
+    <!--一个参考线-->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.15" />
-
+    <!--一个参考线-->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
         android:layout_width="wrap_content"
@@ -189,7 +190,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:text="@string/register_account"
-            android:textSize="12sp"
+            android:textSize="@dimen/fontSize_5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/login_button" />
 
@@ -199,12 +200,13 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:text="@string/forget_password"
-            android:textSize="12sp"
+            android:textSize="@dimen/fontSize_5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/login_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!--一个参考线-->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
         android:layout_width="wrap_content"
@@ -212,6 +214,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.15" />
 
+    <!--一个参考线-->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
         android:layout_width="wrap_content"

@@ -19,7 +19,7 @@ public class ProjectStatic {
     public static final String MODIFY_INFO = "com.example.project_android.activity.ModifyInfo";
 
 
-    public static final String SERVICE_PATH = "http://192.168.1.104:8888/";
+    public static final String SERVICE_PATH = "http://192.168.56.1:8888/";
 
     public static final int DISTANCE = 50;
 

@@ -69,11 +69,11 @@ public class ConfirmDialog extends Dialog {
     });
 
     Handler mHandler = new Handler(msg -> {
-        if (msg.arg2 == SMSSDK.RESULT_COMPLETE && msg.arg1 == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE){
-            confirmSuccessListener.onConfirmSuccess();
-        }else if (msg.arg2 == SMSSDK.RESULT_ERROR && msg.arg1 == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE){
-            Toast.makeText(getContext(), "验证码错误！！！", Toast.LENGTH_SHORT).show();
-        }
+//        if (msg.arg2 == SMSSDK.RESULT_COMPLETE && msg.arg1 == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE){
+//            confirmSuccessListener.onConfirmSuccess();
+//        }else if (msg.arg2 == SMSSDK.RESULT_ERROR && msg.arg1 == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE){
+//            Toast.makeText(getContext(), "验证码错误！！！", Toast.LENGTH_SHORT).show();
+//        }
         return true;
     });
 
@@ -86,8 +86,8 @@ public class ConfirmDialog extends Dialog {
         ButterKnife.bind(this,view);
         setContentView(view);
 
-        SMSSDK.registerEventHandler(eh);
-        resend.performClick();
+        //SMSSDK.registerEventHandler(eh);
+        //resend.performClick();
     }
 
     @OnClick({R.id.yes,R.id.no,R.id.resend})
@@ -98,8 +98,8 @@ public class ConfirmDialog extends Dialog {
                     Toast.makeText(view.getContext(), "验证码未填写完整", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                SMSSDK.submitVerificationCode("86",phone,codeEdit.getText().toString());
-                Log.d("NET-->","执行验证");
+                //SMSSDK.submitVerificationCode("86",phone,codeEdit.getText().toString());
+                //Log.d("NET-->","执行验证");
                 break;
             case R.id.no:
                 dismiss();
@@ -127,7 +127,7 @@ public class ConfirmDialog extends Dialog {
                         timerHandler.sendMessage(message);
                     }
                 }, 0, 1000);
-                SMSSDK.getVerificationCode("86",phone);
+                //SMSSDK.getVerificationCode("86",phone);
                 break;
         }
     }

@@ -5,9 +5,8 @@ plugins {
 }
 
 MobSDK {
-//    袤博账号，注册完成后创建应用即可获得appKey和AppSecret https://www.mob.com/
-    appKey ""
-    appSecret ""
+    appKey "3911475e2c198"
+    appSecret "25f4d1b3cdb015368fe06d6483018ccb"
     SMSSDK {}
 }
 

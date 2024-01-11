@@ -32,24 +32,31 @@ import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
+//忽略资源id变化的警告
 @SuppressLint("NonConstantResourceId")
 public class LoginActivity extends AppCompatActivity {
+    //将界面/视图中的为login_account的id值与accountEdit绑定
     @BindView(R.id.login_account)
     EditText accountEdit;
+
     @BindView(R.id.login_password)
     EditText passwordEdit;
 
     private int userType;
     private SharedPreferences preferences;
 
+    //生命周期的一个方法，当活动被首次创建时调用
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //指定显示界面为layout中的activity_login界面
         setContentView(R.layout.activity_login);
+        //寻找注解并绑定
         ButterKnife.bind(this);
         preferences = getSharedPreferences("localRecord",MODE_PRIVATE);
     }
 
+    //点击监听器注解,用于监听login_register和login_forget_password和login_button
     @OnClick({R.id.login_register,R.id.login_forget_password,R.id.login_button})
     public void onClicked(View view){
         if (!initPermission()){
@@ -66,17 +73,19 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.login_button:
-//                进行登陆操作
+//              //进行登陆操作
                 if (userType == 0 || accountEdit.getText().toString().isEmpty() || passwordEdit.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "请补全登录信息", Toast.LENGTH_SHORT).show();
+                    if(userType == 0 ) Toast.makeText(this, "请选择你的角色", Toast.LENGTH_SHORT).show();
+                    if(accountEdit.getText().toString().isEmpty() ) Toast.makeText(this, "请输入用户名", Toast.LENGTH_SHORT).show();
+                    if(passwordEdit.getText().toString().isEmpty() ) Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 LoadingDialog dialog = new LoadingDialog(view.getContext());
                 dialog.setTitle("登录操作");
-                dialog.setMessage(StringUtils.getString(R.string.wait_message));
+                dialog.setMessage(StringUtils.getString(R.string.wait_message));//请求执行中，请等待
                 dialog.show();
                 Map<String,String> map = new HashMap<>();
-                map.put("type", String.valueOf(userType));
+                map.put("type", String.valueOf(userType));//教师是1，学生是2
                 map.put("account",accountEdit.getText().toString());
                 map.put("password",passwordEdit.getText().toString());
                 NetUtil.getNetData("account/login",map,new Handler(msg -> {
@@ -88,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
                         updateLoginInfo(preferences, data,String.valueOf(userType));
                         Toast.makeText(this, msg.getData().getString("message"), Toast.LENGTH_SHORT).show();
                         startActivity(loginIntent);
-                        finish();
+                        finish();//关闭当前Activity
                     } else{
                         dialog.showSingleButton();
                         dialog.setMessage(msg.getData().getString("message"));

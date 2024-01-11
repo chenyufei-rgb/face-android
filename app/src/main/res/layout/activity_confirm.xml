@@ -102,6 +102,13 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.15" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.65" />
+
         <TextView
             android:id="@+id/confirm_resend"
             android:layout_width="wrap_content"
@@ -116,6 +123,17 @@
             app:layout_constraintEnd_toStartOf="@+id/confirm_confirm"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="@+id/guideline9" />
+
+        <TextView
+            android:id="@+id/textAttention"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/confirm_attention"
+            android:textSize="@dimen/fontSize_1"
+            app:layout_constraintTop_toTopOf="@+id/guideline11"
+            app:layout_constraintBottom_toTopOf="@+id/guideline12"
+            app:layout_constraintEnd_toStartOf="@+id/guideline8"
+            app:layout_constraintStart_toStartOf="@+id/guideline" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

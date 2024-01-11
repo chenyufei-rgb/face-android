@@ -3,16 +3,20 @@ package com.example.project_android.activity.login;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.StringUtils;
 import com.example.project_android.R;
+import com.example.project_android.dialog.LoadingDialog;
 import com.example.project_android.util.CommenUtil;
 import com.example.project_android.dialog.ConfirmDialog;
 import com.example.project_android.util.NetUtil;
@@ -51,32 +55,43 @@ public class ModifyPassword extends AppCompatActivity {
 
     private ConfirmDialog confirmDialog;
 
+    private LoadingDialog dialog;
+
     Handler modifyHandler = new Handler(msg -> {
         if(msg.what == 1){
             Toast.makeText(this, msg.getData().getString("message"), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this,LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
         } else {
             Toast.makeText(this, "修改失败", Toast.LENGTH_SHORT).show();
         }
-        finish();
         return false;
     });
 
     Handler confirmHandler = new Handler(msg -> {
+
         if(msg.what == 1){
             //do something
-            confirmDialog = new ConfirmDialog(this,phone);
-            confirmDialog.setConfirmSuccessListener(() -> {
+            //confirmDialog = new ConfirmDialog(this,phone);
+            //confirmDialog.setConfirmSuccessListener(() -> {
+            dialog = new LoadingDialog(this);
+            dialog.setTitle("修改密码");
+            dialog.setMessage(StringUtils.getString(R.string.wait_message));
+            dialog.show();
+            id = msg.getData().getString("message");
                 Map<String,String> map = new HashMap<>();
                 map.put(userType == 1 ? "teacherId" : "studentId",id);
                 map.put("password",newPassword);
                 NetUtil.getNetData("account/modify"+ (userType == 1 ? "Teacher" : "Student"),map,modifyHandler);
-            });
-            confirmDialog.show();
-            confirmDialog.resend.performClick();
-            id = msg.getData().getString("message");
+            //});
+
+            //confirmDialog.show();
+            //confirmDialog.resend.performClick();
             return true;
         } else {
-            Toast.makeText(this, "手机号输入错误", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "账号输入错误", Toast.LENGTH_SHORT).show();
             return false;
         }
     });
@@ -101,7 +116,7 @@ public class ModifyPassword extends AppCompatActivity {
         oldPassword = oldPasswordEdit.getText().toString();
         newPassword = newPasswordEdit.getText().toString();
 
-        if(account.isEmpty() || !CommenUtil.isPhone(phone) || oldPassword.isEmpty() || newPassword.isEmpty() || userType == 0){
+        if(account.isEmpty()|| oldPassword.isEmpty() || newPassword.isEmpty() || userType == 0){
             Toast.makeText(this, "请补全信息", Toast.LENGTH_SHORT).show();
         } else if (!oldPassword.equals(newPassword)){
             Toast.makeText(this, "密码不一致", Toast.LENGTH_SHORT).show();
