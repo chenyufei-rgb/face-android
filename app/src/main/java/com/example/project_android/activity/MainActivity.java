@@ -32,7 +32,7 @@ import cn.smssdk.ui.companent.CircleImageView;
 
 @SuppressLint("NonConstantResourceId")
 public class MainActivity extends AppCompatActivity {
-    @BindView(R.id.action_bar_title2)
+    @BindView(R.id.action_bar_title)
     TextView titleText;
     @BindView(R.id.drawer_layout_teacher)
     DrawerLayout drawerLayout;
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClicked(View view){
         switch (view.getId()){
             case R.id.action_bar_avatar:
-//                设置标题栏左部小头像的点击事件
+               //设置标题栏左部小头像的点击事件
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
         }
@@ -105,27 +105,35 @@ public class MainActivity extends AppCompatActivity {
                 .error(R.drawable.ic_net_error)
                 .into(headerImage);
         userName.setText("欢迎您！" + preferences.getString("name",null));
-
+        //设置导航抽屉菜单的默认选中项为“课程列表”
         navigationView.setCheckedItem(R.id.main_menu_course);
+        //导航抽屉菜单设置了一个监听器
         navigationView.setNavigationItemSelectedListener(item -> {
+            //关闭导航抽屉
             drawerLayout.closeDrawers();
-//          //执行具体跳转fragment的操作
+            //执行具体跳转fragment的操作
+            //为了进行Fragment的切换，需要开始一个Fragment事务
             FragmentTransaction transaction = fragmentManager.beginTransaction();
+            //隐藏当前显示的Fragment
             hideAllFragment();
             switch (item.getItemId()){
+                //查看课程列表
                 case R.id.main_menu_course:
                     titleText.setText("课程列表");
                     if (courseListFragment == null){
+                        //创建一个新的CourseListFragment实例
                         courseListFragment = new CourseListFragment();
+                        //添加到R.id.fragment_main容器中
                         transaction.add(R.id.fragment_main,courseListFragment);
                     } else {
                         transaction.show(courseListFragment);
                     }
                     transaction.commit();
                     break;
+                    //查看我的信息
                 case R.id.main_menu_info:
                     titleText.setText("我的信息");
-                    Toast.makeText(this, "1", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "查看我的信息", Toast.LENGTH_SHORT).show();
                     if (infoFragment == null){
                         infoFragment = new InfoFragment();
                         transaction.add(R.id.fragment_main,infoFragment);
@@ -134,9 +142,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                     transaction.commit();
                     break;
+                    //修改密码
                 case R.id.main_menu_password:
                     titleText.setText("修改密码");
-                    Toast.makeText(this, "1", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "修改密码", Toast.LENGTH_SHORT).show();
                     if (modifyPasswordFragment == null){
                         modifyPasswordFragment = new ModifyPasswordFragment();
                         modifyPasswordFragment.setSuccessListener(() -> {
@@ -151,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     transaction.commit();
                     break;
+                    //退出登陆
                 case R.id.main_menu_unregister:
                     Intent intent = new Intent(this, LoginActivity.class);
                     startActivity(intent);

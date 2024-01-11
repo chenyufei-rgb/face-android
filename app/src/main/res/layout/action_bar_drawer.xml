@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:background="@color/mainBackground">
 
+   <!---->
     <cn.smssdk.ui.companent.CircleImageView
         android:id="@+id/action_bar_avatar"
         android:layout_width="30dp"
@@ -18,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/action_bar_title2"
+        android:id="@+id/action_bar_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"

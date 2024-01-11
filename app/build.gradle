@@ -5,8 +5,7 @@ plugins {
 }
 
 MobSDK {
-    appKey "3911475e2c198"
-    appSecret "25f4d1b3cdb015368fe06d6483018ccb"
+    appKey ""
     SMSSDK {}
 }
 
